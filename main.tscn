@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://dgahwt1731geg"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_fpm1m"]
+[ext_resource type="Script" path="res://build_camera.gd" id="1_wmafq"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bcjfq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xdyvd"]
+albedo_color = Color(0.266667, 0.588235, 0.364706, 1)
+
+[sub_resource type="Environment" id="Environment_fktbu"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_fpm1m")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_wmafq")
+
+[node name="preview" type="Node3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+
+[node name="floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+mesh = SubResource("PlaneMesh_bcjfq")
+surface_material_override/0 = SubResource("StandardMaterial3D_xdyvd")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fktbu")
+
+[node name="sun" type="DirectionalLight3D" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_right = 416.0
+offset_bottom = 153.0
+text = "Left click to place object
+1 for cube
+2 for beam
+3 for wall
+mouse wheel to rotate
+ESC to quit"
+
+[connection signal="place_item" from="Camera3D" to="." method="_on_camera_3d_place_item"]
