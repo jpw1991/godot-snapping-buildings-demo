@@ -1,17 +1,17 @@
-[gd_resource type="ArrayMesh" load_steps=7 format=3 uid="uid://xsmubayf3mwi"]
+[gd_resource type="ArrayMesh" load_steps=7 format=3 uid="uid://cj4vng810vbtw"]
 
-[ext_resource type="Texture2D" uid="uid://5vpns4sorgsj" path="res://Wood/woodbeam_base.png" id="1_n2s8s"]
-[ext_resource type="Texture2D" uid="uid://bk862alo645v" path="res://Wood/woodbeam_metal.png" id="2_ad5yp"]
-[ext_resource type="Texture2D" uid="uid://dsff0i2ufmcla" path="res://Wood/woodbeam_nor.png" id="3_4vv6h"]
-[ext_resource type="Texture2D" uid="uid://rvryb0od4yqv" path="res://Wood/woodbeam_rough.png" id="4_524gx"]
+[ext_resource type="Texture2D" uid="uid://5vpns4sorgsj" path="res://Wood/woodbeam_base.png" id="1_mmr1t"]
+[ext_resource type="Texture2D" uid="uid://bk862alo645v" path="res://Wood/woodbeam_metal.png" id="2_bb66b"]
+[ext_resource type="Texture2D" uid="uid://dsff0i2ufmcla" path="res://Wood/woodbeam_nor.png" id="3_4blxu"]
+[ext_resource type="Texture2D" uid="uid://rvryb0od4yqv" path="res://Wood/woodbeam_rough.png" id="4_yjb32"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3wtsj"]
-albedo_texture = ExtResource("1_n2s8s")
+albedo_texture = ExtResource("1_mmr1t")
 metallic = 1.0
-metallic_texture = ExtResource("2_ad5yp")
-roughness_texture = ExtResource("4_524gx")
+metallic_texture = ExtResource("2_bb66b")
+roughness_texture = ExtResource("4_yjb32")
 normal_enabled = true
-normal_texture = ExtResource("3_4vv6h")
+normal_texture = ExtResource("3_4blxu")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_cowar"]
 _surfaces = [{

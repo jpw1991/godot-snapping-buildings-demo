@@ -1,42 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://y1xpfhf7cls1"]
+[gd_scene load_steps=4 format=3 uid="uid://y1xpfhf7cls1"]
 
 [ext_resource type="Script" path="res://build_piece_collision.gd" id="1_hd6su"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_yiucl"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_docg6"]
-albedo_color = Color(0.545098, 1, 1, 1)
+[ext_resource type="BoxMesh" uid="uid://b2dmif48fcfp" path="res://meshes/cube.tres" id="2_pn6gm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6so1u"]
 
-[node name="StaticBody3D" type="StaticBody3D" node_paths=PackedStringArray("snap_points")]
+[node name="StaticBody3D" type="StaticBody3D"]
 script = ExtResource("1_hd6su")
-snap_points = [NodePath("SnapPositions/Up"), NodePath("SnapPositions/Down"), NodePath("SnapPositions/Front"), NodePath("SnapPositions/Back"), NodePath("SnapPositions/Left"), NodePath("SnapPositions/Right")]
 
 [node name="Cube" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_yiucl")
+mesh = ExtResource("2_pn6gm")
 skeleton = NodePath("")
-surface_material_override/0 = SubResource("StandardMaterial3D_docg6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_6so1u")
-
-[node name="SnapPositions" type="Node3D" parent="."]
-
-[node name="Up" type="Node3D" parent="SnapPositions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="Down" type="Node3D" parent="SnapPositions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-
-[node name="Front" type="Node3D" parent="SnapPositions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-
-[node name="Back" type="Node3D" parent="SnapPositions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
-
-[node name="Left" type="Node3D" parent="SnapPositions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
-
-[node name="Right" type="Node3D" parent="SnapPositions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)

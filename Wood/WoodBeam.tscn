@@ -6,9 +6,8 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_a6083"]
 size = Vector3(0.126288, 1, 0.12947)
 
-[node name="StaticBody3D" type="StaticBody3D" node_paths=PackedStringArray("snap_points")]
+[node name="StaticBody3D" type="StaticBody3D"]
 script = ExtResource("1_ai15i")
-snap_points = [NodePath("SnapPositions/Up"), NodePath("SnapPositions/Down"), NodePath("SnapPositions/Front"), NodePath("SnapPositions/Back"), NodePath("SnapPositions/Left"), NodePath("SnapPositions/Right")]
 
 [node name="Cube" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_p61sh")
@@ -16,23 +15,3 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_a6083")
-
-[node name="SnapPositions" type="Node3D" parent="."]
-
-[node name="Up" type="Node3D" parent="SnapPositions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="Down" type="Node3D" parent="SnapPositions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-
-[node name="Front" type="Node3D" parent="SnapPositions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.065)
-
-[node name="Back" type="Node3D" parent="SnapPositions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.065)
-
-[node name="Left" type="Node3D" parent="SnapPositions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.065, 0, 0)
-
-[node name="Right" type="Node3D" parent="SnapPositions"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.065, 0, 0)

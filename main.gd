@@ -1,35 +1,40 @@
 extends Node3D
 
 
-var current_structure_index = 0
-
-var structures = [preload("res://Cube.tscn"),
-	preload("res://Wood/WoodBeam.tscn"),
-	preload("res://Wood/WoodWall.tscn")]
+@onready var camera : Camera3D = $camera
+@onready var preview : MeshInstance3D = $preview
 
 
-func _ready():
+func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	$Camera3D.set_preview_object(structures[0])
+	camera.preview = preview
+	update_preview(0)
 
 
-func _input(event):
+func _input(event : InputEvent) -> void:
 	if event.is_action_released("quit"):
 		get_tree().quit()
-	
+
 	if event.is_action_released("cube"):
-		$Camera3D.set_preview_object(structures[0])
-		current_structure_index = 0
+		update_preview(0)
 	elif event.is_action_released("beam"):
-		$Camera3D.set_preview_object(structures[1])
-		current_structure_index = 1
+		update_preview(1)
 	elif event.is_action_released("wall"):
-		$Camera3D.set_preview_object(structures[2])
-		current_structure_index = 2
+		update_preview(2)
+	elif event.is_action_released("rotate_preview_object_left"):
+		preview.rotation_degrees.y = fposmod(preview.rotation_degrees.y + 90.0, 360.0)
+	elif event.is_action_released("rotate_preview_object_right"):
+		preview.rotation_degrees.y = fposmod(preview.rotation_degrees.y - 90.0, 360.0)
 
 
-func _on_camera_3d_place_item(pos, rot):
-	var obj = structures[current_structure_index].instantiate()
-	add_child(obj)
-	obj.global_position = pos
-	obj.global_rotation = rot
+func update_preview(kind : int) -> void:
+	preview.mesh = BuildSystem.buildables[kind].mesh
+	camera.previewKind = kind
+
+
+func _on_camera_3d_place_item() -> void:
+	var scene := BuildSystem.buildables[camera.previewKind].scene.instantiate()
+	# HACK: Need a better way to associate metadata with the instances
+	scene.kind = camera.previewKind
+	add_child(scene)
+	scene.transform = preview.transform
