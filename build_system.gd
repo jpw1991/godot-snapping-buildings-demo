@@ -20,7 +20,3 @@ static func snap_position(
 			best_point = point
 
 	return best_point
-
-
-# HACK: Buildable resources the index in this array is the kind
-@export var buildables : Array[Buildable]

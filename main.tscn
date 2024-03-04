@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dgahwt1731geg"]
+[gd_scene load_steps=9 format=3 uid="uid://dgahwt1731geg"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_fpm1m"]
 [ext_resource type="Script" path="res://build_camera.gd" id="1_wmafq"]
+[ext_resource type="Resource" uid="uid://b0xw3wvsjcmpl" path="res://buildables/cube.tres" id="2_pxd7y"]
 [ext_resource type="Material" uid="uid://ce5fwopl8bum4" path="res://crosshair.tres" id="3_1wxp1"]
-[ext_resource type="Material" uid="uid://cvictwkos2nec" path="res://wireframe_material.tres" id="4_8qwh5"]
+[ext_resource type="Resource" uid="uid://d2xbjkbptors1" path="res://buildables/woodbeam.tres" id="3_2adc7"]
+[ext_resource type="Resource" uid="uid://d0ydstts1a0kb" path="res://buildables/woodwall.tres" id="4_1d67n"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_bcjfq"]
 
@@ -12,16 +14,11 @@ albedo_color = Color(0.266667, 0.588235, 0.364706, 1)
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_fpm1m")
+buildables = [ExtResource("2_pxd7y"), ExtResource("3_2adc7"), ExtResource("4_1d67n")]
 
 [node name="camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_wmafq")
-
-[node name="preview" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5)
-material_override = ExtResource("4_8qwh5")
-cast_shadow = 0
-skeleton = NodePath("../camera")
 
 [node name="floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)

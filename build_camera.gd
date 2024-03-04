@@ -2,6 +2,7 @@
 extends Camera3D
 
 const CROSSHAIR := preload("res://crosshair.tres")
+const WIREFRAME := preload("res://wireframe_material.tres")
 
 const speed = 0.1
 const sensitivity = 0.001
@@ -12,10 +13,13 @@ var gimbal_base: Transform3D
 var gimbal_pitch: Transform3D
 var gimbal_yaw: Transform3D
 
-var preview : MeshInstance3D
-var previewKind := -1
+signal place_item(pos, rot)
 
-signal place_item()
+var current_buildable : Buildable
+# Use an object that's added to the top level and not a child of the camera for
+# the preview so that the rotation etc. doesn't get messed up. Set global
+# positioning to move it with the player camera.
+var _preview_object : MeshInstance3D = null
 
 
 static func raycast_at_cursor(
@@ -48,7 +52,8 @@ func _input(event):
 
 	if event is InputEventMouseButton:
 		if event.is_action_released("action_one"):
-			place_item.emit()
+			# emit simple pos & rot for network friendliness later (if implemented)
+			place_item.emit(_preview_object.global_position, _preview_object.global_rotation)
 
 
 func _physics_process(delta : float) -> void:
@@ -93,6 +98,24 @@ func _physics_process(delta : float) -> void:
 	update_preview()
 
 
+func rotate_preview_left():
+	_preview_object.rotation_degrees.y = fposmod(_preview_object.rotation_degrees.y + 90.0, 360.0)
+
+
+func rotate_preview_right():
+	_preview_object.rotation_degrees.y = fposmod(_preview_object.rotation_degrees.y - 90.0, 360.0)
+
+
+func set_preview_object(buildable : Buildable):
+	if !_preview_object:
+		_preview_object = MeshInstance3D.new()
+		# HACK: replace get_parent() with whatever your root map node is
+		get_parent().add_child(_preview_object)
+	current_buildable = buildable
+	_preview_object.mesh = current_buildable.mesh
+	_preview_object.set_surface_override_material(0, WIREFRAME)
+
+
 func update_preview() -> void:
 	var viewport := get_viewport()
 	# Just use the middle of the screen since the cursor is locked
@@ -100,23 +123,24 @@ func update_preview() -> void:
 	if result:
 		var result_collider : Node3D = result["collider"]
 		if result_collider is BuildPieceCollision:
-			var buildable : Buildable = BuildSystem.buildables[previewKind]
+			#var buildable : Buildable = BuildSystem.buildables[previewKind]
 			var normal : Vector3 = result["normal"]
 			# Collider snap point with normal most aligned with collision normal
-			var collider_snap : Vector3 = result_collider.snap_position(normal)
+			var collider_snap : Vector3 = result_collider.snap_position(normal, current_buildable)
 
 			# Preview snap point with normal most opposite collision normal
-			var preview_basis := preview.basis
+			var preview_basis := _preview_object.basis
 			# World to local space
 			var local_basis := preview_basis.inverse()
 			# Local space normal
 			var local_normal := local_basis * normal
 			var preview_snap : Vector3 = BuildSystem.snap_position(
-				buildable, -local_normal
+				current_buildable, -local_normal
 			)
-			preview.position = collider_snap - preview_basis * preview_snap
+			_preview_object.global_position = collider_snap - preview_basis * preview_snap
+			_preview_object.global_rotation = result_collider.global_rotation
 			CROSSHAIR.set_shader_parameter("snap", true)
 			return
 
-	preview.position = position - basis.z * 5.0
+	_preview_object.global_position = global_position - basis.z * 5.0
 	CROSSHAIR.set_shader_parameter("snap", false)

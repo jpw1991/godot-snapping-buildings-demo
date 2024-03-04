@@ -2,13 +2,13 @@ extends Node3D
 
 
 @onready var camera : Camera3D = $camera
-@onready var preview : MeshInstance3D = $preview
+
+@export var buildables : Array[Buildable]
 
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	camera.preview = preview
-	update_preview(0)
+	camera.set_preview_object(buildables[0])
 
 
 func _input(event : InputEvent) -> void:
@@ -16,25 +16,19 @@ func _input(event : InputEvent) -> void:
 		get_tree().quit()
 
 	if event.is_action_released("cube"):
-		update_preview(0)
+		camera.set_preview_object(buildables[0])
 	elif event.is_action_released("beam"):
-		update_preview(1)
+		camera.set_preview_object(buildables[1])
 	elif event.is_action_released("wall"):
-		update_preview(2)
+		camera.set_preview_object(buildables[2])
 	elif event.is_action_released("rotate_preview_object_left"):
-		preview.rotation_degrees.y = fposmod(preview.rotation_degrees.y + 90.0, 360.0)
+		camera.rotate_preview_left()
 	elif event.is_action_released("rotate_preview_object_right"):
-		preview.rotation_degrees.y = fposmod(preview.rotation_degrees.y - 90.0, 360.0)
+		camera.rotate_preview_right()
 
 
-func update_preview(kind : int) -> void:
-	preview.mesh = BuildSystem.buildables[kind].mesh
-	camera.previewKind = kind
-
-
-func _on_camera_3d_place_item() -> void:
-	var scene := BuildSystem.buildables[camera.previewKind].scene.instantiate()
-	# HACK: Need a better way to associate metadata with the instances
-	scene.kind = camera.previewKind
+func _on_camera_3d_place_item(pos, rot) -> void:
+	var scene = camera.current_buildable.scene.instantiate()
 	add_child(scene)
-	scene.transform = preview.transform
+	scene.global_position = pos
+	scene.global_rotation = rot
