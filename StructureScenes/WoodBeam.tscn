@@ -1,16 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://dhr31u1d766vk"]
 
-[ext_resource type="Script" path="res://build_piece_collision.gd" id="1_ai15i"]
-[ext_resource type="ArrayMesh" uid="uid://xsmubayf3mwi" path="res://Wood/woodbeam_mesh.tres" id="1_p61sh"]
+[ext_resource type="Script" path="res://build_piece_collision.gd" id="1_5qcon"]
+[ext_resource type="ArrayMesh" uid="uid://xsmubayf3mwi" path="res://meshes/woodbeam_mesh.tres" id="2_f860q"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_a6083"]
 size = Vector3(0.126288, 1, 0.12947)
 
 [node name="StaticBody3D" type="StaticBody3D"]
-script = ExtResource("1_ai15i")
+script = ExtResource("1_5qcon")
 
 [node name="Cube" type="MeshInstance3D" parent="."]
-mesh = ExtResource("1_p61sh")
+mesh = ExtResource("2_f860q")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

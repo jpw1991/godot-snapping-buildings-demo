@@ -1,16 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://duer7g14bx2bo"]
 
-[ext_resource type="Script" path="res://build_piece_collision.gd" id="1_vixgl"]
-[ext_resource type="ArrayMesh" uid="uid://c3hy7o1mknxhk" path="res://Wood/woodwall_mesh.tres" id="2_ko1wn"]
+[ext_resource type="Script" path="res://build_piece_collision.gd" id="1_324nw"]
+[ext_resource type="ArrayMesh" uid="uid://dkedgqfu2oyko" path="res://meshes/woodwall_mesh.tres" id="2_m5g0o"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_a6083"]
 size = Vector3(1, 1, 0.051679)
 
 [node name="StaticBody3D" type="StaticBody3D"]
-script = ExtResource("1_vixgl")
+script = ExtResource("1_324nw")
 
 [node name="Cube" type="MeshInstance3D" parent="."]
-mesh = ExtResource("2_ko1wn")
+mesh = ExtResource("2_m5g0o")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

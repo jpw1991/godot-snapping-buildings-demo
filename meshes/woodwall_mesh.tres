@@ -1,6 +1,7 @@
 [gd_resource type="ArrayMesh" load_steps=3 format=3 uid="uid://dkedgqfu2oyko"]
 
-[ext_resource type="Material" uid="uid://cjifr6w1cvsdr" path="res://Wood/woodwall_material.tres" id="1_a02bn"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7y1ri"]
+albedo_color = Color(0.505882, 0.372549, 0.156863, 1)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_wsxq8"]
 _surfaces = [{
@@ -24,7 +25,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 36,
 "index_data": PackedByteArray(6, 0, 9, 0, 3, 0, 18, 0, 14, 0, 20, 0, 22, 0, 19, 0, 4, 0, 8, 0, 2, 0, 13, 0, 7, 0, 15, 0, 16, 0, 12, 0, 1, 0, 5, 0, 6, 0, 3, 0, 0, 0, 18, 0, 20, 0, 23, 0, 22, 0, 4, 0, 10, 0, 8, 0, 13, 0, 17, 0, 7, 0, 16, 0, 11, 0, 12, 0, 5, 0, 21, 0),
-"material": ExtResource("1_a02bn"),
+"material": SubResource("StandardMaterial3D_7y1ri"),
 "name": "Material.002",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),

@@ -1,11 +1,13 @@
 [gd_resource type="Resource" script_class="Buildable" load_steps=4 format=3 uid="uid://b0xw3wvsjcmpl"]
 
 [ext_resource type="Script" path="res://buildable.gd" id="1_gvo4y"]
-[ext_resource type="BoxMesh" uid="uid://b2dmif48fcfp" path="res://meshes/cube.tres" id="1_slq06"]
-[ext_resource type="PackedScene" uid="uid://y1xpfhf7cls1" path="res://Cube.tscn" id="2_wxkpr"]
+[ext_resource type="BoxMesh" uid="uid://b2dmif48fcfp" path="res://meshes/cube_mesh.tres" id="1_slq06"]
+[ext_resource type="PackedScene" uid="uid://y1xpfhf7cls1" path="res://StructureScenes/Cube.tscn" id="2_wxkpr"]
 
 [resource]
 script = ExtResource("1_gvo4y")
 snap_points = PackedVector3Array(-0.5, -4.52514e-12, -4.52514e-12, 0.5, -4.52514e-12, -4.52514e-12, -4.52514e-12, -0.5, -4.52514e-12, -4.52514e-12, 0.5, -4.52514e-12, -4.52514e-12, -4.52514e-12, -0.5, -4.52514e-12, -4.52514e-12, 0.5)
 mesh = ExtResource("1_slq06")
 scene = ExtResource("2_wxkpr")
+translation_key = ""
+object_id = ""

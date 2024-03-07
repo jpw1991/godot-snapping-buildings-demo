@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Buildable" load_steps=4 format=3 uid="uid://85mam31n8wlk"]
+
+[ext_resource type="ArrayMesh" uid="uid://c7y6sotiyrm7g" path="res://meshes/2x1_mesh_new.tres" id="1_mtayt"]
+[ext_resource type="PackedScene" uid="uid://1rytloxjvyok" path="res://StructureScenes/2x1.tscn" id="2_dcax6"]
+[ext_resource type="Script" path="res://buildable.gd" id="3_u0o5p"]
+
+[resource]
+script = ExtResource("3_u0o5p")
+snap_points = PackedVector3Array(0, 0.5, 0.5, 0, 0.5, -0.5, 0, -0.5, 0.5, 0, -0.5, -0.5, 0, 0, -1, -0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0, 0.5, 0, 0, 1, -0.5, 0, 0.5)
+mesh = ExtResource("1_mtayt")
+scene = ExtResource("2_dcax6")
+translation_key = ""
+object_id = ""

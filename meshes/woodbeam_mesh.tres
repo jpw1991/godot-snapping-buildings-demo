@@ -1,17 +1,7 @@
-[gd_resource type="ArrayMesh" load_steps=7 format=3 uid="uid://xsmubayf3mwi"]
+[gd_resource type="ArrayMesh" load_steps=3 format=3 uid="uid://xsmubayf3mwi"]
 
-[ext_resource type="Texture2D" uid="uid://5vpns4sorgsj" path="res://Wood/woodbeam_base.png" id="1_n2s8s"]
-[ext_resource type="Texture2D" uid="uid://bk862alo645v" path="res://Wood/woodbeam_metal.png" id="2_ad5yp"]
-[ext_resource type="Texture2D" uid="uid://dsff0i2ufmcla" path="res://Wood/woodbeam_nor.png" id="3_4vv6h"]
-[ext_resource type="Texture2D" uid="uid://rvryb0od4yqv" path="res://Wood/woodbeam_rough.png" id="4_524gx"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3wtsj"]
-albedo_texture = ExtResource("1_n2s8s")
-metallic = 1.0
-metallic_texture = ExtResource("2_ad5yp")
-roughness_texture = ExtResource("4_524gx")
-normal_enabled = true
-normal_texture = ExtResource("3_4vv6h")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mm8t8"]
+albedo_color = Color(0.85098, 0.976471, 0.709804, 1)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_cowar"]
 _surfaces = [{
@@ -35,7 +25,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 36,
 "index_data": PackedByteArray(14, 0, 1, 0, 7, 0, 6, 0, 10, 0, 23, 0, 18, 0, 21, 0, 15, 0, 3, 0, 16, 0, 22, 0, 2, 0, 5, 0, 11, 0, 13, 0, 17, 0, 4, 0, 14, 0, 7, 0, 20, 0, 6, 0, 23, 0, 19, 0, 18, 0, 15, 0, 12, 0, 3, 0, 22, 0, 9, 0, 2, 0, 11, 0, 8, 0, 13, 0, 4, 0, 0, 0),
-"material": SubResource("StandardMaterial3D_3wtsj"),
+"material": SubResource("StandardMaterial3D_mm8t8"),
 "name": "Material.001",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),

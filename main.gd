@@ -21,6 +21,8 @@ func _input(event : InputEvent) -> void:
 		camera.set_preview_object(buildables[1])
 	elif event.is_action_released("wall"):
 		camera.set_preview_object(buildables[2])
+	elif event.is_action_released("long_block"):
+		camera.set_preview_object(buildables[3])
 	elif event.is_action_released("rotate_preview_object_left"):
 		camera.rotate_preview_left()
 	elif event.is_action_released("rotate_preview_object_right"):
