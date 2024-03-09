@@ -21,6 +21,10 @@ var current_buildable : Buildable
 # positioning to move it with the player camera.
 var _preview_object : MeshInstance3D = null
 
+# Whatever custom rotation the player has applied via mouse wheel scrolling.
+# This gets added to the base-rotation of the snap object.
+var _rotation_degrees = 0.0
+
 
 static func raycast_at_cursor(
 	viewport : Viewport, origin : Vector2, max_distance : float, mask : int
@@ -99,11 +103,13 @@ func _physics_process(delta : float) -> void:
 
 
 func rotate_preview_left():
-	_preview_object.rotation_degrees.y = fposmod(_preview_object.rotation_degrees.y + 90.0, 360.0)
+	_rotation_degrees += 90.0
+	_preview_object.rotation_degrees.y = fposmod(_preview_object.rotation_degrees.y + _rotation_degrees, 360.0)
 
 
 func rotate_preview_right():
-	_preview_object.rotation_degrees.y = fposmod(_preview_object.rotation_degrees.y - 90.0, 360.0)
+	_rotation_degrees -= 90.0
+	_preview_object.rotation_degrees.y = fposmod(_preview_object.rotation_degrees.y + _rotation_degrees, 360.0)
 
 
 func set_preview_object(buildable : Buildable):
@@ -139,6 +145,7 @@ func update_preview() -> void:
 			)
 			_preview_object.global_position = collider_snap - preview_basis * preview_snap
 			_preview_object.global_rotation = result_collider.global_rotation
+			_preview_object.rotation_degrees.y = fposmod(_preview_object.rotation_degrees.y + _rotation_degrees, 360.0)
 			CROSSHAIR.set_shader_parameter("snap", true)
 			return
 
